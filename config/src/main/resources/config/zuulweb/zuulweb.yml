@@ -1,0 +1,51 @@
+server:
+  port: 8079
+  
+logging:
+    level:
+      com.netflix: DEBUG
+      org.springframework.web: DEBUG
+      com.thoughtmechanix: DEBUG  
+      
+management:
+  security:  
+   enabled: false      
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+       include: '*'
+    web:
+     exposure:
+      include: '*'
+      base-path: /actuator
+    cors:
+      allowed-origins: 'true'
+      enabled-by-default: 'false'
+      
+spring:
+  application:
+    name: zuulweb   
+  zipkin:
+    baseUrl: http://localhost:9411
+    enabled: true
+  sleuth:
+    enabled: true
+    sampler:
+    percentage: 1 
+  cloud:
+    config:
+      uri: http://localhost:8888                 
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  cloud:
+    config:
+      uri: http://localhost:8888
+    discovery:
+        enabled: true

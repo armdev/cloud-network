@@ -1,0 +1,62 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: wiki  
+  cloud:
+    config:
+       name: wiki
+       uri: http://localhost:8888
+    discovery:
+       service-id: config
+       enabled: true   
+ 
+  profiles:
+    active:
+      default
+      
+  zipkin:
+    baseUrl: http://localhost:9411
+    enabled: true
+  sleuth:
+    enabled: true
+    sampler:
+    percentage: 1 
+    
+management:
+  security:  
+   enabled: false      
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+       include: '*'
+    web:
+     exposure:
+      include: '*'
+      base-path: /actuator
+    cors:
+      allowed-origins: 'true'
+      enabled-by-default: 'false'
+
+message: "##I am from config server@@@"
+
+
+eureka:
+  instance:
+    # interval for periodic heartbeat to the registry; default 10
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    enabled: true
+    registryFetchIntervalSeconds: 5
+    # by default, Eureka uses the client heartbeat to determine if a client is up. Unless specified otherwise the
+    # Discovery Client will not propagate the current health check status of the application.
+    # should only be set in application.yml
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}  
