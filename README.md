@@ -14,11 +14,11 @@ Eureka server
 1. Run eureka server
    Access http://localhost:8761/
    
-2. Config server   
+Config server   
    ---------------------------
    Just run
 
-3. Wiki service
+Wiki service
    ---------------------------
    Application using webflux and undertow. Configuration: reactive using Servlet API, because swagger does not support Spring boot netty reactive stack
       
