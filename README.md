@@ -18,6 +18,26 @@ Config server
    ---------------------------
    Just run
 
+Hystrix
+   ---------------------------  
+   Just run  
+   Access http://localhost:8082/hystrix
+   
+Turbine
+   ---------------------------  
+   Just run  
+   Access http://localhost:8083/turbine.stream
+   Hystrix + Turbine access link    http://localhost:8082/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8083%2Fturbine.stream
+   
+
+Zipkin
+   ---------------------------  
+   Just run  
+   Access http://localhost:9411
+      
+   
+   
+   
 Wiki service
    ---------------------------
    Application using webflux and undertow. Configuration: reactive using Servlet API, because swagger does not support Spring boot netty reactive stack
@@ -39,5 +59,7 @@ c. Send empty POST request to (use restlet_client chrome plugin)
 d. Access again, output will change
 
    http://localhost:8081/api/v1/wiki/secret/message
+   
+   Check also ZIPKIN http://localhost:9411   
 
    Additional Information  https://andressanchezblog.wordpress.com/2016/09/15/refresh-scope-in-spring-cloud/

@@ -7,9 +7,20 @@ spring:
      config:
        server:
            native:              
-              searchLocations: classpath:config/, classpath:config/wiki
+              searchLocations: classpath:config/, classpath:config/wiki, classpath:config/turbine, classpath:config/hystrix, classpath:config/zipkin
+              
+              
 eureka:
+  instance:
+   prefer-ip-address: true  
+   leaseRenewalIntervalInSeconds: 3
+   leaseExpirationDurationInSeconds: 3 
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}    
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  cloud:
+    config:
+      uri: http://localhost:8888
+    discovery:
+        enabled: true   
 

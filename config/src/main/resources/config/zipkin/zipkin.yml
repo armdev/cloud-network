@@ -9,25 +9,18 @@ spring:
       uri: http://localhost:8888/
    
   sleuth:
-      enabled: true  
+    enabled: false  
   zipkin:
     storage.type: mem  
     
-  jpa:
-    generate-ddl: false
-    show-sql: true
-    hibernate:
-    ddl-auto: none
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  eureka:
+    enabled: true     
 
- 
-logging:
-  level:
-    root: INFO
-    org.hibernate: INFO
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-    com.itmuch.youran.persistence: ERROR
-    
 hystrix:
   command:
     RemoteMessageClientCommand:
@@ -41,17 +34,18 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000    
 eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
   instance:
-    preferIpAddress: true
-    
-ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
-  MaxAutoRetries: 0
-  MaxAutoRetriesNextServer: 1
-  eureka:
-    enabled: true 
+    # interval for periodic heartbeat to the registry; default 10
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    enabled: true
+    registryFetchIntervalSeconds: 5
+    # by default, Eureka uses the client heartbeat to determine if a client is up. Unless specified otherwise the
+    # Discovery Client will not propagate the current health check status of the application.
+    # should only be set in application.yml
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}  
+
     

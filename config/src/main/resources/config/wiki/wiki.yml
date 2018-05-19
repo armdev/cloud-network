@@ -43,7 +43,7 @@ management:
       allowed-origins: 'true'
       enabled-by-default: 'false'
 
-message: "##I am from config server@@@"
+message: "##I am from config server@@"
 
 
 eureka:
