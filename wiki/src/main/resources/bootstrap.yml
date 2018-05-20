@@ -3,6 +3,31 @@ spring:
     name: wiki    
   cloud:
     config:
+      name: config
+      fail-fast: false
+      discovery:
+        service-id: config 
+        enabled: true
       uri: http://localhost:8888/
       profile: default           
-      label: master          
+      label: master
+      retry:
+        initial-interval: 1000
+        max-attempts: 50
+        max-interval: 1000
+        multiplier: 1
+
+eureka:
+  instance:
+    # interval for periodic heartbeat to the registry; default 10
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    enabled: true
+    registryFetchIntervalSeconds: 5
+    # by default, Eureka uses the client heartbeat to determine if a client is up. Unless specified otherwise the
+    # Discovery Client will not propagate the current health check status of the application.
+    # should only be set in application.yml
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}  
